@@ -34,7 +34,9 @@ def main():
                     session_api.messages.send(peer_id=peer_id, message='Пока!', random_id=0)
                 elif content[0][1:] == 'кубик':
                     number = randint(1, 6)
-                    upload_result = upload_session.photo_messages(photos=utils.DICE_PATH / f'{number}.png')
+                    upload_result = upload_session.photo_messages(
+                        photos=str((utils.DICE_PATH / f'{number}.png').resolve())
+                    )
                     picture = f"photo{upload_result[0]['owner_id']}_{upload_result[0]['id']}"
                     session_api.messages.send(peer_id=peer_id, message=f'Вам выпало {number}!',
                                               attachment=picture, random_id=0)
