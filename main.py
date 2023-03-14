@@ -2,6 +2,7 @@ import vk_api
 import requests
 import adds
 import utils
+from pathlib import Path
 from io import BytesIO
 from PIL import Image
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
@@ -33,7 +34,7 @@ def main():
                     session_api.messages.send(peer_id=peer_id, message='Пока!', random_id=0)
                 elif content[0][1:] == 'кубик':
                     number = randint(1, 6)
-                    upload_result = upload_session.photo_messages(photos=f'dices/{number}.png')
+                    upload_result = upload_session.photo_messages(photos=utils.DICE_PATH / f'{number}.png')
                     picture = f"photo{upload_result[0]['owner_id']}_{upload_result[0]['id']}"
                     session_api.messages.send(peer_id=peer_id, message=f'Вам выпало {number}!',
                                               attachment=picture, random_id=0)
