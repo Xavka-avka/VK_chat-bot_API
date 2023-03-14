@@ -42,12 +42,13 @@ def main():
                         'https://api.ipgeolocation.io/ipgeo',
                         params=adds.g_api_params
                     ).json()
+                    print(geolocation['latitude'], geolocation['longitude'])
                     weather = requests.get(
                         'https://api.weather.yandex.ru/v2/informers?',
                         headers=adds.y_api_headers,
-                        params={'lat': geolocation['latitude'], 'lon': geolocation['longitude'], 'lang': 'ru_RU'}
+                        params={'lat': 53.19171, 'lon': 50.19091, 'lang': 'ru_RU'}
                     ).json()
-                    answer = f'Погода для {geolocation["country_name"]}, {geolocation["city"]}:' \
+                    answer = f'Погода для Russia, Samara' \
                              f'\nТемпература: {weather["fact"]["temp"]}°C' \
                              f'\nОщущается как: {weather["fact"]["feels_like"]}°C' \
                              f'\nСкорость ветра: {weather["fact"]["wind_speed"]} м/с'
